@@ -13,11 +13,11 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import "./css/BookList.css";
+import "../css/BookList.css";
 import RemoveIcon from "@mui/icons-material/Remove";
 import EditIcon from "@mui/icons-material/Edit";
 
-import "./css/BookList.css";
+import "../css/BookList.css";
 const BookList = () => {
   const [books, setBooks] = useState([]);
   const [editBook, setEditBook] = useState(null);
