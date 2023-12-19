@@ -11,12 +11,15 @@ require (
 
 require (
 	github.com/andybalholm/brotli v1.0.6 // indirect
+	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cilium/ebpf v0.12.3 // indirect
 	github.com/cosiner/argv v0.1.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.3 // indirect
 	github.com/derekparker/trie v0.0.0-20230829180723-39f4de51ef7d // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/go-delve/delve v1.21.2 // indirect
 	github.com/go-delve/liner v1.2.3-0.20220127212407-d32d89dd2a5d // indirect
+	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/google/go-dap v0.11.0 // indirect
 	github.com/google/uuid v1.4.0 // indirect
