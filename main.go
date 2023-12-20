@@ -13,6 +13,7 @@ import (
 	"time"
 	"github.com/sirupsen/logrus"
 	"os"
+	"LibraryManagementSystem/middlewares"
 )
 
 var ctx = context.Background()
@@ -50,6 +51,8 @@ func main() {
 	// Use CORS middleware
     app.Use(cors.New())
 
+	app.Use(middleware.PrometheusMiddleware)
+
 	// Routes
 	app.Get("/books", getBooks)
 	app.Get("/books/:id", getBook)
@@ -57,6 +60,8 @@ func main() {
 	app.Put("/books/:id", updateBook)
 	app.Delete("/books/:id", deleteBook)
 	routes.AuthRoutes(app)
+
+	app.Get("/metrics", middleware.PrometheusHandler())
 
 	log.Fatal(app.Listen(":8080"))
 }
