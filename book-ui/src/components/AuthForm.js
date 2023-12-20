@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../css/AuthForm.css";
+import { Button } from "@mui/material";
 
 const AuthForm = ({ type, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -30,12 +32,36 @@ const AuthForm = ({ type, onSuccess }) => {
         }
       })
       .catch((error) => {
-        console.error(`Error ${type}:`, error.response.data);
+        console.error(`Error ${type}:`, error.response.data.error);
+        switch (error.response.data.error) {
+          case "Invalid Password": {
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "Invalid password";
+            errorMessage.style.color = "red";
+            document.querySelector(".auth-container").appendChild(errorMessage);
+            break;
+          }
+          case "User does not exist": {
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "Invalid email";
+            errorMessage.style.color = "red";
+            document.querySelector(".auth-container").appendChild(errorMessage);
+            break;
+          }
+          case "User already exists": {
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "User already exists, please login";
+            errorMessage.style.color = "red";
+            document.querySelector(".auth-container").appendChild(errorMessage);
+            break;
+          }
+          default: {
+          }
+        }
       });
   };
-
   return (
-    <div>
+    <div className="auth-container">
       <h2>{type === "login" ? "Login" : "Signup"}</h2>
       {type === "signup" && (
         <>
@@ -55,7 +81,6 @@ const AuthForm = ({ type, onSuccess }) => {
         value={formData.email}
         onChange={handleChange}
       />
-      <br />
       <label>Password:</label>
       <input
         type="password"
@@ -63,10 +88,9 @@ const AuthForm = ({ type, onSuccess }) => {
         value={formData.password}
         onChange={handleChange}
       />
-      <br />
-      <button onClick={handleSubmit}>
+      <Button variant="contained" color="secondary" onClick={handleSubmit}>
         {type === "login" ? "Login" : "Signup"}
-      </button>
+      </Button>
     </div>
   );
 };

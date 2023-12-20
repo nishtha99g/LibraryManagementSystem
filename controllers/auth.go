@@ -25,13 +25,13 @@ func Login(c *fiber.Ctx) error {
     models.DB.Where("email = ?", user.Email).First(&existingUser)
 
 	if existingUser.ID == 0 {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "user does not exist"})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "User does not exist"})
 	}
 
 	errHash := utils.CompareHashPassword(user.Password, existingUser.Password)
 
 	if !errHash {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "invalid password"})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid Password"})
 	}
 
 	expirationTime := time.Now().Add(5 * time.Minute)
@@ -77,7 +77,7 @@ func Signup(c *fiber.Ctx) error {
 	models.DB.Where("email = ?", user.Email).First(&existingUser)
 
 	if existingUser.ID != 0 {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "user already exists"})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "User already exists"})
 	}
 
 	hashedPassword, err := utils.GenerateHashPassword(user.Password)
