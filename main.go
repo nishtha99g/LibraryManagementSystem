@@ -51,7 +51,7 @@ func main() {
 	// Use CORS middleware
     app.Use(cors.New())
 
-	app.Use(middleware.PrometheusMiddleware)
+	app.Use(middlewares.PrometheusMiddleware)
 
 	// Routes
 	app.Get("/books", getBooks)
@@ -61,7 +61,7 @@ func main() {
 	app.Delete("/books/:id", deleteBook)
 	routes.AuthRoutes(app)
 
-	app.Get("/metrics", middleware.PrometheusHandler())
+	//app.Get("/metrics", middlewares.PrometheusHandler())
 
 	log.Fatal(app.Listen(":8080"))
 }

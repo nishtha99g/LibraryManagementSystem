@@ -10,7 +10,7 @@ import (
 
 func IsAuthorized() fiber.Handler {
     return func(c *fiber.Ctx) error {
-        cookie := c.Cookie("token")
+        cookie := c.Cookies("token")
 
         if cookie == "" {
             return c.Status(401).JSON(fiber.Map{"error": "unauthorized"})
